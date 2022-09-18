@@ -36,30 +36,37 @@ var randomColors=[];
             break;
         }
     } //Koniec losowania kolorów
-                                 
-    for(let i=0;i<randomColors.length;i++)
-        console.log(randomColors[i]);
     
+    for(let k=0;k<4;k++){
+    var globalColors = document.createElement("div");
+    globalColors.className="invisible";
+    globalColors.innerHTML=randomColors[k];
+    document.body.appendChild(globalColors);
+    }
+                                 
+//    for(let i=0;i<randomColors.length;i++)
+//        console.log(randomColors[i]);
+//    
     
     
     createNewP();
     insertBallsToLastP();
-    
-    
-//    var newVerificationButton=document.createElement("div");
-//    newVerificationButton.className="verificationButton";
-//    newVerificationButton.innerHTML="Sprawdź";
-//    newVerificationButton.addEventListener("click",verifiAndInsert)
-//    
-//     let lastRow=document.getElementsByClassName("row").length;
-//    
-//    for(let i=1;i<5;i++)
-//    document.getElementsByClassName("row")[lastRow-1].appendChild(newVerificationButton);
-
-    
+        
     insertVerifyButton();
     
-   // console.log(verification());
+    
+    
+    var blackAndWhite=[];
+    blackAndWhite[0]=0;
+    var lastAttempt=[];
+    var randomColors=[];
+    var lastAttempt= colorsLastAttempt();
+    var randomColors= readRandomColors();
+    
+    
+    console.log(randomColors);
+    
+    
     
 });
 
@@ -141,7 +148,7 @@ function lockColorChangeInLastP(){
     document.getElementsByClassName("row")[lastP-1].children[i].dataset.color="locked";
 }
 
-function verification(){
+function colorsLastAttempt(){
     let lastP=document.getElementsByClassName("row").length
     var ballsNumber = document.getElementsByClassName("row")[lastP-1].children.length;
     let results=[];
@@ -166,7 +173,7 @@ function insertVerifyButton(){
 
 function verifiAndInsert(){
     
-    var results=verification();
+    var results=colorsLastAttempt();
     
     for(let i=0;i<results.length;i++)
     {
@@ -181,6 +188,14 @@ function verifiAndInsert(){
     createNewP();
     insertBallsToLastP();
     insertVerifyButton();
+}
+
+function readRandomColors(){    
+    var randomColors=[];
+    for(i=0;i<4;i++){
+        randomColors[i]=document.getElementsByClassName("invisible")[i].innerHTML;
+    }
+    return randomColors;
 }
 
 
