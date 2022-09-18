@@ -47,12 +47,12 @@ var randomColors=[];
     insertBallsToLastP();
     createNewP();
     insertBallsToLastP();
+
     
-//    let lastP=document.getElementsByClassName("row").length
-//    console.log(document.getElementsByClassName("row")[lastP-1].children);
-//    document.getElementsByClassName("row")[lastP-1].children.forEach.removeEventListener("click",function);
-    
+    console.log(verification());
+    lockColorChangeInLastP();
 });
+
 
 function createNewP(){
     var newRow=document.createElement("p");
@@ -76,9 +76,7 @@ function createBall(i) {
                     newBall.setAttribute("data-color", "gray");
                     newBall.setAttribute("data-number", i);
 
-                    newBall.addEventListener('click', function() {
-            //console.log(i);
-                        
+                    newBall.addEventListener('click', function() {    
 
               if(this.dataset.color=="gray")
               {
@@ -122,6 +120,27 @@ function createBall(i) {
                     });
   return newBall;
 };
+
+function lockColorChangeInLastP(){
+   let lastP=document.getElementsByClassName("row").length
+    //console.log(document.getElementsByClassName("row")[lastP-1].children[1]);
+    
+    var ballsNumber = document.getElementsByClassName("row")[lastP-1].children.length;
+    
+    for(i=0;i<ballsNumber;i++)
+    document.getElementsByClassName("row")[lastP-1].children[i].dataset.color="locked";
+}
+
+function verification(){
+    let lastP=document.getElementsByClassName("row").length
+    var ballsNumber = document.getElementsByClassName("row")[lastP-1].children.length;
+    let results=[];
+    
+    for(i=0;i<ballsNumber;i++){
+        results[i]=document.getElementsByClassName("row")[lastP - 1].children[i].dataset.color
+   }
+    return results;
+}
 
 
 
