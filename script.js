@@ -42,15 +42,25 @@ var randomColors=[];
     
     
     
-
     createNewP();
     insertBallsToLastP();
-    createNewP();
-    insertBallsToLastP();
+    
+    
+//    var newVerificationButton=document.createElement("div");
+//    newVerificationButton.className="verificationButton";
+//    newVerificationButton.innerHTML="Sprawdź";
+//    newVerificationButton.addEventListener("click",verifiAndInsert)
+//    
+//     let lastRow=document.getElementsByClassName("row").length;
+//    
+//    for(let i=1;i<5;i++)
+//    document.getElementsByClassName("row")[lastRow-1].appendChild(newVerificationButton);
 
     
-    console.log(verification());
-    lockColorChangeInLastP();
+    insertVerifyButton();
+    
+   // console.log(verification());
+    
 });
 
 
@@ -136,10 +146,41 @@ function verification(){
     var ballsNumber = document.getElementsByClassName("row")[lastP-1].children.length;
     let results=[];
     
-    for(i=0;i<ballsNumber;i++){
+    for(i=0;i<ballsNumber-1;i++){
         results[i]=document.getElementsByClassName("row")[lastP - 1].children[i].dataset.color
    }
     return results;
+}
+
+function insertVerifyButton(){
+  var newVerificationButton=document.createElement("div");
+    newVerificationButton.className="verificationButton";
+    newVerificationButton.innerHTML="Sprawdź";
+    newVerificationButton.addEventListener("click",verifiAndInsert)
+    
+     let lastRow=document.getElementsByClassName("row").length;
+    
+    for(let i=1;i<5;i++)
+    document.getElementsByClassName("row")[lastRow-1].appendChild(newVerificationButton);
+}
+
+function verifiAndInsert(){
+    
+    var results=verification();
+    
+    for(let i=0;i<results.length;i++)
+    {
+        //console.log(results);
+        if(results[i]=='gray'){
+            alert("zostawiłeś szarą kulkę");
+        return;}
+    }
+    
+    
+    lockColorChangeInLastP();
+    createNewP();
+    insertBallsToLastP();
+    insertVerifyButton();
 }
 
 
