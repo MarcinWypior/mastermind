@@ -145,6 +145,13 @@ function lockColorChangeInLastP(){
     
     for(i=0;i<ballsNumber;i++)
     document.getElementsByClassName("row")[lastP-1].children[i].dataset.color="locked";
+ 
+       
+    let VerificationButtons=document.getElementsByClassName("verificationButton");
+    
+    console.log(VerificationButtons);
+    
+    VerificationButtons[VerificationButtons.length-1].style.display = "none";
 }
 
 function colorsLastAttempt(){
@@ -229,10 +236,16 @@ function verifiAndInsert(){
     addResultBalls(blackBalls,whiteBalls);
     if(blackBalls===4)
     {
-        alert("wygrałeś");
         showColorsAtEnd();
+        alert("wygrałeś");
         return;
     }
+    
+    //  TUTAJ WSTAW ZATRZYMANIE STOPERA !!!
+    
+     if(document.getElementsByClassName("row").length===1)
+     {
+     }
     
     if(document.getElementsByClassName("row").length>7)
     {
@@ -242,6 +255,7 @@ function verifiAndInsert(){
         return;
     }
     
+        //  TUTAJ WSTAW ZATRZYMANIE STOPERA !!!
     
     createNewP();
     insertBallsToLastP();
@@ -307,8 +321,4 @@ function showColorsAtEnd(){
     }   
     document.body.appendChild(AnswersP); 
 }
-
-
-
-
 

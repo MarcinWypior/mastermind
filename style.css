@@ -16,8 +16,9 @@
 border-style: solid;
 border-width: 2px;
 border-color: black;
-border-radius: 3px;
+border-radius: 4px;
 padding: 1.5%;
+margin: 1.5%;
 }
 
 .answers{
@@ -30,6 +31,7 @@ padding: 1.5%;
 }
 
 .verificationButton{
+    height: inherit;
     background-color: orange;
     display: inline-flex;
     border-style: solid;
@@ -37,7 +39,7 @@ padding: 1.5%;
     border-radius: 3px;
     padding: 2%;
     vertical-align: top;
-    margin-left: 3%;
+    margin-left: 5%;
 }
 
 .resultBall {
@@ -53,8 +55,48 @@ padding: 1.5%;
 .results {
     display: inline;
     height: auto;
+    margin-left: 5%;
 }
 
 .invisible{
  display: none;
+}
+
+
+.wrapper {
+width: 800px;
+margin: 30px auto;
+color:$white;
+text-align:center;
+}
+
+h1, h2, h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 2.6em;
+  text-transform: uppercase;
+}
+
+#seconds, #tens{
+  font-size:2em;
+}
+
+button{
+@include corners (5px);
+background:$base-color;
+color:$white;
+border: solid 1px $white;
+text-decoration:none;
+cursor:pointer;
+font-size:1.2em;
+padding:18px 10px;
+width:180px;
+margin: 10px;
+ outline: none;
+  &:hover{
+	@include transition;
+	background:$white;
+	border: solid 1px $white;
+	color:$base-color;
+	}
 }
