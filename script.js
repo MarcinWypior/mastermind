@@ -43,11 +43,7 @@ var randomColors=[];
     globalColors.innerHTML=randomColors[k];
     document.body.appendChild(globalColors);
     }
-                                 
-//    for(let i=0;i<randomColors.length;i++)
-//        console.log(randomColors[i]);
-//    
-    
+                                     
     
     createNewP();
     insertBallsToLastP();
@@ -56,18 +52,21 @@ var randomColors=[];
     
     
     
-    var blackAndWhite=[];
-    blackAndWhite[0]=0;
+    var black0AndWhite1=[];
+    black0AndWhite1[0]=0;
     var lastAttempt=[];
     var randomColors=[];
-    var lastAttempt= colorsLastAttempt();
-    var randomColors= readRandomColors();
+    lastAttempt= colorsLastAttempt();
+    randomColors= readRandomColors();
     
-    
-    console.log(randomColors);
-    
-    
-    
+    for(let i=0;i<4;i++){
+        console.log("twoja proba " + lastAttempt[i]);
+        console.log("wylosowana  " + randomColors[i]);
+     if(lastAttempt[i]==randomColors[i]){
+         black0AndWhite1[1]++;
+         console.log("są takie same dla kuli nr " + i);
+        }
+    }
 });
 
 
@@ -183,8 +182,67 @@ function verifiAndInsert(){
         return;}
     }
     
-    
     lockColorChangeInLastP();
+    
+    var randomColors=readRandomColors();
+    var whiteBalls=0;
+    var blackBalls=0;
+    
+    for(let i=0;i<results.length;i++)
+    {
+        if(results[i]===randomColors[i]){
+           blackBalls++;
+            randomColors[i];
+            console.log("wybrałeś "+results[i]+ " na pozycji "+i  +" a wylosowało "+randomColors[i]);
+            randomColors[i]="gray";
+            results[i]="gray";
+        }
+    }
+    
+    console.log(results);
+    
+    for(let i=0;i<results.length;i++)
+    {
+        for(let j=0;j<results.length;j++)
+        {
+            if(randomColors[j]==="gray")
+                continue;
+            
+             if(results[i]==="gray")
+                continue;
+            
+            if(results[i]===randomColors[j]){
+               whiteBalls++;
+                console.log("ten sam kolor " +randomColors[j]+" dla losowych kolorów na pozycji "+j+
+                            " i wybranych przez ciebie kolor "+results[i]+ " na pozycji "+i);
+                
+                randomColors[j]="gray";
+                results[i]="gray";
+                
+            }
+        }
+    }
+    
+    console.log(results);
+    
+    
+    addResultBalls(blackBalls,whiteBalls);
+    if(blackBalls===4)
+    {
+        alert("wygrałeś");
+        showColorsAtEnd();
+        return;
+    }
+    
+    if(document.getElementsByClassName("row").length>7)
+    {
+        console.log("liczba prób " + document.getElementsByClassName("row").length);
+        showColorsAtEnd();
+         alert("przegrałeś");
+        return;
+    }
+    
+    
     createNewP();
     insertBallsToLastP();
     insertVerifyButton();
@@ -196,6 +254,58 @@ function readRandomColors(){
         randomColors[i]=document.getElementsByClassName("invisible")[i].innerHTML;
     }
     return randomColors;
+}
+
+function addResultBalls(b,w){
+    
+    var results=document.createElement("div");
+    results.className="results";
+    
+    
+    
+    for(x=0;x<b;x++){
+        var resultBall=document.createElement("span");
+        resultBall.className="resultBall";
+        resultBall.style.backgroundColor="black";
+        results.appendChild(resultBall);
+    }
+    
+     for(x=0;x<w;x++){
+        var resultBall=document.createElement("span");
+        resultBall.className="resultBall";
+        resultBall.style.backgroundColor="white";
+        results.appendChild(resultBall);
+    }
+    
+    console.log("ilość czarnych rezultat "+b+" ilość białych rezultat " +w);
+    
+    if((b===0)&&(w===0))
+    return;
+    
+    results.appendChild(resultBall);
+    
+    let lastRow=document.getElementsByClassName("row").length;
+
+    
+    
+    document.getElementsByClassName("row")[lastRow-1].appendChild(results);  
+}
+
+
+function showColorsAtEnd(){
+    let randomColors=readRandomColors();
+    
+     var AnswersP=document.createElement("p");
+    AnswersP.className="answers";
+    AnswersP.innerHTML="poprawne odpowiedzi to: <br><br>";
+    
+    for(i=0;i<4;i++){
+     var newBall=document.createElement("span");
+                    newBall.className="ball";
+                    newBall.style.backgroundColor=randomColors[i];
+        AnswersP.appendChild(newBall);
+    }   
+    document.body.appendChild(AnswersP); 
 }
 
 
