@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', (event) => {
+    
+    
+ 
+    
 let colors=6;
 let attempts=8;
 let slots=4;
@@ -94,6 +98,13 @@ function createBall(i) {
 
                     newBall.addEventListener('click', function() {    
 
+                //PLAY SOUND EFFECT !!!
+              if(this.dataset.color!=="locked")
+              {
+                playSimpleClick();
+              }
+                        
+                        
               if(this.dataset.color=="gray")
               {
                 this.style.backgroundColor="red";//1
@@ -166,7 +177,7 @@ function colorsLastAttempt(){
 }
 
 function insertVerifyButton(){
-  var newVerificationButton=document.createElement("div");
+  var newVerificationButton=document.createElement("span");
     newVerificationButton.className="verificationButton";
     newVerificationButton.innerHTML="Sprawdź";
     newVerificationButton.addEventListener("click",verifiAndInsert)
@@ -178,13 +189,14 @@ function insertVerifyButton(){
 }
 
 function verifiAndInsert(){
-    
+
     var results=colorsLastAttempt();
     
     for(let i=0;i<results.length;i++)
     {
         //console.log(results);
         if(results[i]=='gray'){
+            playError();
             alert("zostawiłeś szarą kulkę");
         return;}
     }
@@ -237,25 +249,33 @@ function verifiAndInsert(){
     if(blackBalls===4)
     {
         showColorsAtEnd();
+        playWin();
         alert("wygrałeś");
+    //  TUTAJ WSTAW ZATRZYMANIE STOPERA !!!
+    StopTimer() ;            
         return;
     }
     
-    //  TUTAJ WSTAW ZATRZYMANIE STOPERA !!!
     
-     if(document.getElementsByClassName("row").length===1)
+     if(document.getElementsByClassName("row").length==1)
      {
+         // Rozpoczęcie odliczania Czasu
+         const timer = document.getElementById("timer");
+    timer.innerHTML=0;
+    myInterval=setInterval(function() {timer.innerHTML= Number(timer.innerHTML)+1},1000);
      }
     
     if(document.getElementsByClassName("row").length>7)
     {
         console.log("liczba prób " + document.getElementsByClassName("row").length);
         showColorsAtEnd();
+        playFail();
          alert("przegrałeś");
+        //  TUTAJ WSTAW ZATRZYMANIE STOPERA !!!
+    StopTimer();          
         return;
     }
     
-        //  TUTAJ WSTAW ZATRZYMANIE STOPERA !!!
     
     createNewP();
     insertBallsToLastP();
@@ -321,4 +341,46 @@ function showColorsAtEnd(){
     }   
     document.body.appendChild(AnswersP); 
 }
+
+function StopTimer() {
+  clearInterval(myInterval);
+}
+
+
+function playSimpleClick() { 
+var simpleClick = document.getElementById("simpleClick"); 
+  if (simpleClick.paused) {
+        simpleClick.play();
+    }else{
+        simpleClick.currentTime = 0
+    }
+} 
+
+function playError() { 
+var error = document.getElementById("error"); 
+  if (error.paused) {
+        error.play();
+    }else{
+        error.currentTime = 0
+    }
+} 
+
+function playWin() { 
+var win = document.getElementById("win"); 
+  if (win.paused) {
+        win.play();
+    }else{
+        win.currentTime = 0
+    }
+} 
+
+function playFail() { 
+var fail = document.getElementById("fail"); 
+  if (fail.paused) {
+        fail.play();
+    }else{
+        fail.currentTime = 0
+    }
+} 
+ 
 

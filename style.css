@@ -1,3 +1,13 @@
+body{
+    display: grid; 
+    justify-content: center;
+}
+
+#timer{
+    position: absolute;
+  top:0;
+}
+
 .ball {
     margin: 2px;
     height: 50px;
@@ -13,36 +23,45 @@
 }
 
 .row{
+    position: relative;
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    height: 6.4vh;
 border-style: solid;
 border-width: 2px;
 border-color: black;
 border-radius: 4px;
-padding: 1.5%;
-margin: 1.5%;
+padding: 5px;
+margin: 4px;
+    width: 350px;
+
 }
 
-.answers{
-    font-size: 1.5rem;
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
-    border-radius: 2px;
-    padding: 2.5%;
-}
 
 .verificationButton{
-    height: inherit;
+    /*position: relative;
+    top: 50%;
+    transform: translateY(-55%);*/
+    line-height: 28px;
+     margin: 0;
+    height: 30px;
+    width: 58px;
     background-color: orange;
-    display: inline-flex;
+  display: inline-block;
     border-style: solid;
     border-width: 2px;
     border-radius: 3px;
-    padding: 2%;
+    padding: 10px;*/
     vertical-align: top;
-    margin-left: 5%;
+    margin-left: 25px;
 }
 
+
 .resultBall {
+    position: relative;
+    top: 50%;
+    transform: translateY(-20%);
     margin: 1px;
     height: 24px;
     width: 24px;
@@ -53,50 +72,23 @@ margin: 1.5%;
 }
 
 .results {
-    display: inline;
-    height: auto;
+    position: relative;
+    height: 50px;
     margin-left: 5%;
+     justify-content:flex-end;
 }
 
 .invisible{
  display: none;
 }
 
-
-.wrapper {
-width: 800px;
-margin: 30px auto;
-color:$white;
-text-align:center;
-}
-
-h1, h2, h3 {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100;
-  font-size: 2.6em;
-  text-transform: uppercase;
-}
-
-#seconds, #tens{
-  font-size:2em;
-}
-
-button{
-@include corners (5px);
-background:$base-color;
-color:$white;
-border: solid 1px $white;
-text-decoration:none;
-cursor:pointer;
-font-size:1.2em;
-padding:18px 10px;
-width:180px;
-margin: 10px;
- outline: none;
-  &:hover{
-	@include transition;
-	background:$white;
-	border: solid 1px $white;
-	color:$base-color;
-	}
+.answers{
+    font-size: 3.3vh;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 2px;
+    padding: 15px;
+     width: 353px;
+    border-radius: 5px;
 }
