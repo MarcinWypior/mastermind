@@ -92,3 +92,30 @@ margin: 4px;
      width: 353px;
     border-radius: 5px;
 }
+
+.Alarm{
+    position: absolute;
+    margin: auto;
+    transform: translateX(-50%);
+    bottom: 8.5%;
+    left: 50%;
+    display: none;
+    background-color: white;
+    border-width: 2px;
+    border-radius: 2px;
+    border-style: solid;
+    padding: 2.5vh;
+    padding: 25px;
+     width: 353px;
+    height: 14vh;
+    align-content: center;
+    vertical-align: middle;
+}
+
+.closeAlarm{
+ display: inline-block;
+}
+
+.AlarmMessage{
+    font-size: 6vh;
+}

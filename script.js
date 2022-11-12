@@ -7,10 +7,15 @@ let colors=6;
 let attempts=8;
 let slots=4;
 let currentRow=1;
-    
+/*    
 console.log(colors+" kolorów do zgadywania \n");
 console.log(attempts+" prób \n");
 console.log(slots+" miesjsca na kulki \n");
+  */  
+ var closeAlarm=document.getElementsByClassName("Alarm");
+closeAlarm[0].addEventListener('click',hideAlarm );
+ document.body.addEventListener('mousedown',hideAlarm,true);
+    
     
 var randomColors=[];    
     for(let i=0;i<slots;i++)
@@ -64,8 +69,8 @@ var randomColors=[];
     randomColors= readRandomColors();
     
     for(let i=0;i<4;i++){
-        console.log("twoja proba " + lastAttempt[i]);
-        console.log("wylosowana  " + randomColors[i]);
+       /* console.log("twoja proba " + lastAttempt[i]);
+        console.log("wylosowana  " + randomColors[i]);*/
      if(lastAttempt[i]==randomColors[i]){
          black0AndWhite1[1]++;
          console.log("są takie same dla kuli nr " + i);
@@ -98,7 +103,7 @@ function createBall(i) {
 
                     newBall.addEventListener('click', function() {    
 
-                //PLAY SOUND EFFECT !!!
+                //PLAY SOUND EFFECT !!!Spra
               if(this.dataset.color!=="locked")
               {
                 playSimpleClick();
@@ -197,8 +202,11 @@ function verifiAndInsert(){
         //console.log(results);
         if(results[i]=='gray'){
             playError();
-            alert("zostawiłeś szarą kulkę");
-        return;}
+            showAlarm("zostawiłeś szarą kulkę !"); 
+            //delay(10);
+            //alert("zostawiłeś szarą kulkę");
+        return;
+        }
     }
     
     lockColorChangeInLastP();
@@ -248,11 +256,13 @@ function verifiAndInsert(){
     addResultBalls(blackBalls,whiteBalls);
     if(blackBalls===4)
     {
-        showColorsAtEnd();
+        showColorsAtEnd("Wygrałeś ! \n");
         playWin();
-        alert("wygrałeś");
+        //delay(10);
+        StopTimer();           
+        //showAlarm("Wygrałeś !"); 
+       // alert("wygrałeś");
     //  TUTAJ WSTAW ZATRZYMANIE STOPERA !!!
-    StopTimer() ;            
         return;
     }
     
@@ -267,12 +277,13 @@ function verifiAndInsert(){
     
     if(document.getElementsByClassName("row").length>7)
     {
-        console.log("liczba prób " + document.getElementsByClassName("row").length);
-        showColorsAtEnd();
+        //console.log("liczba prób " + document.getElementsByClassName("row").length);
+        showColorsAtEnd("Przegrałeś ! \n");
         playFail();
-         alert("przegrałeś");
+        StopTimer();          
+        //showAlarm("Przegrałeś !"); 
+        //alert("przegrałeś");
         //  TUTAJ WSTAW ZATRZYMANIE STOPERA !!!
-    StopTimer();          
         return;
     }
     
@@ -311,7 +322,7 @@ function addResultBalls(b,w){
         results.appendChild(resultBall);
     }
     
-    console.log("ilość czarnych rezultat "+b+" ilość białych rezultat " +w);
+    //console.log("ilość czarnych rezultat "+b+" ilość białych rezultat " +w);
     
     if((b===0)&&(w===0))
     return;
@@ -326,12 +337,12 @@ function addResultBalls(b,w){
 }
 
 
-function showColorsAtEnd(){
+function showColorsAtEnd(text){
     let randomColors=readRandomColors();
     
      var AnswersP=document.createElement("p");
     AnswersP.className="answers";
-    AnswersP.innerHTML="poprawne odpowiedzi to: <br><br>";
+    AnswersP.innerHTML=text+" poprawne odpowiedzi to: <br><br>";
     
     for(i=0;i<4;i++){
      var newBall=document.createElement("span");
@@ -381,6 +392,29 @@ var fail = document.getElementById("fail");
     }else{
         fail.currentTime = 0
     }
-} 
+}
+
+
+
+function showAlarm(text){
+   let alarm = document.getElementsByClassName("Alarm");
+    alarm[0].style.display="inline-block";
+    console.log("alarm"+alarm[0]);
+       let alarmMessage =document.getElementsByClassName("AlarmMessage");
+    alarmMessage[0].innerHTML=text;
+    /*var closeAlarm=document.getElementsByClassName("closeAlarm");
+    console.log("close Alarm" + closeAlarm);
+    closeAlarm[0].style.display="inline-block";*/
+}
+
+function hideAlarm() {
+         var AlarmMessage=document.getElementsByClassName("AlarmMessage");
+         console.log(    AlarmMessage[0]);
+         AlarmMessage[0].innerHTML="";
+             var tmp=document.getElementsByClassName("Alarm");
+             tmp[0].style.display="none";  
+         }
+
+
  
 
